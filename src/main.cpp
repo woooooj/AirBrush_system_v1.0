@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "SerialCommand.h"
 SerialCommand sCmd;
-int gg=5;
+int gg=40;
 
 #define X_DIR_PIN          5
 #define X_STEP_PIN         2
@@ -37,6 +37,7 @@ volatile int ind = 0;
 volatile unsigned int intervals[100];
 
 bool verbose = true;
+bool FFirst = false;
 
 struct stepperInfo {
   // externally defined parameters
@@ -111,7 +112,7 @@ void paintt();
 
 void setup() {
   Serial.begin(9600);
-
+  FFirst = true;
   pinMode(X_STEP_PIN,   OUTPUT);
   pinMode(X_DIR_PIN,    OUTPUT);
   pinMode(X_ENABLE_PIN, OUTPUT);
@@ -435,18 +436,27 @@ void loop() {
 
 
   sCmd.readSerial();
-  int w = 110;
-  FindZero(1);
 
-  if (one == 0){
-    one = 100;
-    while(w>=10){
-      MotorMove_ABS(1,w);
-      gg=45;
-      Paint(50,150,1);
-      delay(1000);
-      w-=25;
-    }
+  if (FFirst){
+    Paint(70,230,1);
+    delay(5*1000);
+    Paint(70,230,3);
+    FFirst=false;
+    delay(100*1000);
+  }
+
+  // int w = 110;
+  // FindZero(1);
+  //
+  // if (one == 0){
+  //   one = 100;
+  //   while(w>=10){
+  //     MotorMove_ABS(1,w);
+  //     gg=45;
+  //     Paint(50,150,1);
+  //     delay(1000);
+  //     w-=25;
+  //   }
 
     // gg=20;
     // Paint(50,150);
@@ -493,7 +503,7 @@ void loop() {
     // delay(1000);
 
 
-  }
+  // }
 
   // FindZero(0);
   // FindZero(1);
