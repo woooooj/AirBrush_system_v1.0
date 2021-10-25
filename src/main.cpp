@@ -2,6 +2,7 @@
 #include "SerialCommand.h"
 SerialCommand sCmd;
 int gg=40;
+# some comment
 
 #define X_DIR_PIN          5
 #define X_STEP_PIN         2
