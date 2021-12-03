@@ -3,6 +3,7 @@
 SerialCommand sCmd;
 int gg=40;
 # some comment
+# some comment 2
 
 #define X_DIR_PIN          5
 #define X_STEP_PIN         2
